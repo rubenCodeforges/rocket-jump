@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3eb90fcd9ea47ec815b3426e8d04e9f, type: 3}
-  m_Name: RcsThruster
+  m_Name: SmallRcsThruster
   m_EditorClassIdentifier: 
-  name: 
-  thrust: 0
-  type: 0
-  model: {fileID: 0}
+  name: SmallRcsThruster
+  thrust: 100
+  type: 1
+  model: {fileID: 5007238491389480824, guid: b55faed431673f049a84e99dbf07de5e, type: 3}

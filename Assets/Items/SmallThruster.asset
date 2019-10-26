@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eb90fcd9ea47ec815b3426e8d04e9f, type: 3}
   m_Name: SmallThruster
   m_EditorClassIdentifier: 
-  name: 
-  thrust: 0
+  name: SmallThruster
+  thrust: 200
   type: 0
-  model: {fileID: 0}
+  model: {fileID: 6340472397436768021, guid: 9f99a98a0dc62364ab4b71a909e2b2bc, type: 3}
