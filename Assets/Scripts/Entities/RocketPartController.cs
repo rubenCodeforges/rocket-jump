@@ -10,9 +10,11 @@ namespace Entities
     {
         public RocketPart part;
         private InputEventSubject eventSubject;
-
+        private ParticleSystem particleSystem;
+        private bool isThrusting = false;
         private void Start()
         {
+            particleSystem = transform.GetComponentInChildren<ParticleSystem>();
             eventSubject = GameManager.Instance.inputEventSubject;
             eventSubject = GameManager.Instance.inputEventSubject;
             eventSubject.UserInput += OnUserInput;
