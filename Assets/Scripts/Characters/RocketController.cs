@@ -1,25 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Enums;
+using Events;
+using Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MovementController : MonoBehaviour
+public class RocketController : MonoBehaviour
 {
-    public float thrust = 100f;
-    public float rcsThrust = 100f;
+    public float thrust = 0f;
+    public float rcsThrust = 0f;
     public Transform currentThruster;
     public Transform currentRcs;
     public Transform mainThrusterAttachment;
     public Transform rcsThrusterAttachment;
 
     private Rigidbody rigidBody;
+    private InputEventSubject eventSubject;
 
-    // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        eventSubject = GameManager.Instance.inputEventSubject;
+        eventSubject.UserInput += (object source, UserInputEventArgs args) => { print(args.Direction); };
+
 //        mainThruster.parent = rigidBody.transform;
 //        rcsThruster.parent = rigidBody.transform;
     }
@@ -35,23 +41,18 @@ public class MovementController : MonoBehaviour
         var horizontalInput = Input.GetAxis("Horizontal");
         if (Input.GetButton("Jump"))
         {
-            EmitInputEvent(InputDirection.UP);
+            eventSubject.OnUserInput(InputDirection.UP);
             rigidBody.AddForceAtPosition(mainThrusterAttachment.up * (thrust * Time.deltaTime),
                 mainThrusterAttachment.position);
         }
 
         if (horizontalInput != 0f)
         {
-            EmitInputEvent(horizontalInput > 0f ? InputDirection.RIGHT : InputDirection.LEFT);
+            eventSubject.OnUserInput(horizontalInput > 0f ? InputDirection.RIGHT : InputDirection.LEFT);
             rigidBody.AddForceAtPosition(
                 rcsThrusterAttachment.right * (horizontalInput * rcsThrust * Time.deltaTime),
                 rcsThrusterAttachment.position
             );
         }
-    }
-
-    private void EmitInputEvent(InputDirection direction)
-    {
-        //ExecuteEvents.Execute<IUserInputSubject>(GetComponent<>(), null, (x, y) => x.OnUserInput(direction));
     }
 }

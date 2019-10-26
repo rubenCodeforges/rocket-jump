@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Enums;
+﻿using Enums;
 using UnityEngine;
 
-public class AttachmentScript : MonoBehaviour, IUserInputSubject
+public class AttachmentScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
