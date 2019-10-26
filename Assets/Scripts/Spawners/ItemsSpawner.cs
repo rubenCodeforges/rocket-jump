@@ -7,7 +7,6 @@ public class ItemsSpawner : MonoBehaviour
 {
     public List<GameObject> prefabs;
     
-    // Start is called before the first frame update
     void Start()
     {
         var items = RocketPartsDatabase.Instance.rocketParts;
@@ -26,11 +25,5 @@ public class ItemsSpawner : MonoBehaviour
 
             lastPrefabSize = size;
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
