@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6184652281781416702}
   - component: {fileID: 8216800236327728647}
+  - component: {fileID: 7191792333090427596}
   m_Layer: 0
   m_Name: RocketPartsInventory
   m_TagString: Untagged
@@ -46,3 +47,16 @@ MonoBehaviour:
   rocketParts:
   - {fileID: 11400000, guid: b99ed75d8f1c3ce489a6eaed50176556, type: 2}
   - {fileID: 11400000, guid: 7eebbc1cadd5cf945afbece74a21fb6e, type: 2}
+--- !u!114 &7191792333090427596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7125644495946371353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b4adae717426e54eb32db8f5286d895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs: []
