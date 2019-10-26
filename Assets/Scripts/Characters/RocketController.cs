@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Enums;
+﻿using Enums;
 using Events;
 using Managers;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class RocketController : MonoBehaviour
 {
