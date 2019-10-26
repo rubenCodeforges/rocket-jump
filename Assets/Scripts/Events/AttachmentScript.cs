@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Enums;
 using UnityEngine;
 
-public class AttachmentScript : MonoBehaviour
+public class AttachmentScript : MonoBehaviour, IUserInputSubject
 {
     // Start is called before the first frame update
     void Start()
@@ -20,5 +21,10 @@ public class AttachmentScript : MonoBehaviour
                print(hit.transform.name);
             }
         }
+    }
+
+    public void OnUserInput(InputDirection direction)
+    {
+        print(direction);
     }
 }

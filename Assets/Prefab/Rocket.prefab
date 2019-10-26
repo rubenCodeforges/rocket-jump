@@ -69,8 +69,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 120
   rcsThrust: 20
-  mainThruster: {fileID: 0}
-  rcsThruster: {fileID: 0}
+  currentThruster: {fileID: 0}
+  currentRcs: {fileID: 0}
+  mainThrusterAttachment: {fileID: 4415502139214386206}
+  rcsThrusterAttachment: {fileID: 8465950965395113533}
 --- !u!1 &1021386552942740844
 GameObject:
   m_ObjectHideFlags: 0
