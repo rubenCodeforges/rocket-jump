@@ -37,13 +37,32 @@ public class AttachmentScript : MonoBehaviour
 
         if (type == PartType.THRUSTER)
         {
-            rocketController.thrust = thrust;
+            attachMainThruster(rocketPart, thrust);
         }
         else if (type == PartType.RCS)
         {
-            rocketController.rcsThrust = thrust;
+            attachRCSThruster(rocketPart, thrust);
         }
-
         print(rocketPart.part.thrust);
+    }
+
+    private void attachMainThruster(RocketPartController rocketPart, float thrust)
+    {
+        var attachmentPoint = rocketController.mainThrusterAttachment;
+        var rocketPartTransform = rocketPart.transform;
+
+        rocketController.thrust = thrust;
+        rocketPartTransform.position = attachmentPoint.position;
+        rocketPartTransform.parent = attachmentPoint.transform;
+    }
+
+    private void attachRCSThruster(RocketPartController rocketPart, float thrust)
+    {
+        var attachmentPoint = rocketController.rcsThrusterAttachment;
+        var rocketPartTransform = rocketPart.transform;
+
+        rocketController.rcsThrust = thrust;
+        rocketPartTransform.position = attachmentPoint.position;
+        rocketPartTransform.parent = attachmentPoint.transform;
     }
 }

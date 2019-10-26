@@ -45,7 +45,7 @@ public class RocketController : MonoBehaviour
         {
             eventSubject.OnUserInput(horizontalInput > 0f ? InputDirection.RIGHT : InputDirection.LEFT);
             rigidBody.AddForceAtPosition(
-                rcsThrusterAttachment.right * (horizontalInput * rcsThrust * Time.deltaTime),
+                rcsThrusterAttachment.right * (horizontalInput * rcsThrust * -1 * Time.deltaTime),
                 rcsThrusterAttachment.position
             );
         }
