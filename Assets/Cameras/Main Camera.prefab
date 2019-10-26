@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 34752802203807243}
   - component: {fileID: 34752802203807244}
   - component: {fileID: 34752802203807245}
-  - component: {fileID: 8288287280969642271}
+  - component: {fileID: 571637927525159804}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -84,7 +84,7 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34752802203807246}
   m_Enabled: 1
---- !u!114 &8288287280969642271
+--- !u!114 &571637927525159804
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,3 +96,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd9bf9fc9032ce8498e2ca34f4bcaa59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rocketController: {fileID: 0}
