@@ -16,4 +16,4 @@ MonoBehaviour:
   thrust: 0
   type: 1
   fuel: 200
-  model: {fileID: 3554001996573712517, guid: 1d69c43364fdc6c4b9127937208534ec, type: 3}
+  model: {fileID: 279087089353678178, guid: 79f8a99342116aa4492a27a4ef8657cf, type: 3}

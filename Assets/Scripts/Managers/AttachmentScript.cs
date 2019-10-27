@@ -22,7 +22,7 @@ public class AttachmentScript : MonoBehaviour
         OnInventorySelect();
     }
 
-    private void ApplyAttachment(RocketPartController rocketPart)
+    private void HandleAttachment(RocketPartController rocketPart)
     {
         var type = rocketPart.part.type;
 
@@ -58,7 +58,7 @@ public class AttachmentScript : MonoBehaviour
     private void attachFuelTank(RocketPartController rocketPart)
     {
         rocketController.fuel = rocketPart.part.fuel;
-        applyAttachment(rocketPart, rocketPart.transform, rocketController.rcsThrusterAttachment);
+        applyAttachment(rocketPart, rocketPart.transform, rocketController.fuelTankAttachment);
     }
 
     private void applyAttachment(RocketPartController rocketPart, Transform rocketPartTransform, Transform attachmentPoint)
@@ -108,7 +108,7 @@ public class AttachmentScript : MonoBehaviour
                 var rocketPart = hit.transform.gameObject.GetComponent<RocketPartController>();
                 if (rocketPart != null)
                 {
-                    ApplyAttachment(rocketPart);
+                    HandleAttachment(rocketPart);
                 }
             }
         }
