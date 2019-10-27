@@ -43,12 +43,18 @@ namespace Entities
 
         private void StopExhaust()
         {
-            //particleSystem.Stop();
+            if (particleSystem != null)
+            {
+                particleSystem.Stop();
+            }
         }
 
         private void StartExhaust()
         {
-            //particleSystem.Play();
+            if (particleSystem != null)
+            {
+                particleSystem.Play();                
+            }
         }
     }
 }

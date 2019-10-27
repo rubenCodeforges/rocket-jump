@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 7076326208510177182}
   - component: {fileID: 4520914608543222247}
   m_Layer: 8
-  m_Name: ExhaustParticles
+  m_Name: Exhaust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
