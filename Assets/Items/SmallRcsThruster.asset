@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: SmallRcsThruster
   thrust: 20
-  type: 2
+  type: 3
   fuel: 0
   model: {fileID: 5007238491389480824, guid: b55faed431673f049a84e99dbf07de5e, type: 3}
+  weight: 0.01
