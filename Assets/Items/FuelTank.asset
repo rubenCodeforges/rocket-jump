@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3eb90fcd9ea47ec815b3426e8d04e9f, type: 3}
   m_Name: FuelTank
   m_EditorClassIdentifier: 
-  name: 
+  name: FuelTank
   thrust: 0
   type: 1
   fuel: 200
-  model: {fileID: 4353094718234437969, guid: 43575e2112f52694ca34dc0fef242432, type: 3}
+  model: {fileID: 3554001996573712517, guid: 1d69c43364fdc6c4b9127937208534ec, type: 3}

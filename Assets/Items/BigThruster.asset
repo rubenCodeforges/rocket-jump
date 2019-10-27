@@ -15,4 +15,5 @@ MonoBehaviour:
   name: SmallThruster
   thrust: 120
   type: 0
+  fuel: 0
   model: {fileID: 6340472397436768021, guid: b33065088988a9a45bcb844a3ce16ee3, type: 3}

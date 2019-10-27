@@ -19,48 +19,66 @@ public class AttachmentScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                var rocketPart = hit.transform.gameObject.GetComponent<RocketPartController>();
-                if (rocketPart != null)
-                {
-                    ApplyAttachment(rocketPart);
-                }
-            }
-        }
+        OnInventorySelect();
     }
 
     private void ApplyAttachment(RocketPartController rocketPart)
     {
-        var thrust = rocketPart.part.thrust;
         var type = rocketPart.part.type;
 
         if (type == PartType.THRUSTER)
         {
-            var attachedPart = 
-                attachedRocketParts.Find((p) => rocketPart.part.type.Equals(p.part.type));
-            if (attachedPart != null)
-            {
-                detachPart(attachedPart);
-            }
-            attachMainThruster(rocketPart, thrust);
+            toggleDetach(attachedRocketParts.Find((p) => rocketPart.part.type.Equals(p.part.type)));
+            attachMainThruster(rocketPart);
         }
         else if (type == PartType.RCS)
         {
-            print("rcs");
-            attachRCSThruster(rocketPart, thrust);
+            attachRCSThruster(rocketPart);
+        } else if (type == PartType.FUEL)
+        {
+            attachFuelTank(rocketPart);
         }
         RocketPartsDatabase.Instance.inventory.Remove(rocketPart);
-        print(rocketPart.part.thrust);
     }
 
+
+
+    private void attachMainThruster(RocketPartController rocketPart)
+    {
+        rocketController.thrust = rocketPart.part.thrust;
+        applyAttachment(rocketPart, rocketPart.transform, rocketController.mainThrusterAttachment);
+    }
+
+    private void attachRCSThruster(RocketPartController rocketPart)
+    {
+        rocketController.rcsThrust = rocketPart.part.thrust;
+        applyAttachment(rocketPart, rocketPart.transform, rocketController.rcsThrusterAttachment);
+    }
+    
+    private void attachFuelTank(RocketPartController rocketPart)
+    {
+        rocketController.fuel = rocketPart.part.fuel;
+        applyAttachment(rocketPart, rocketPart.transform, rocketController.rcsThrusterAttachment);
+    }
+
+    private void applyAttachment(RocketPartController rocketPart, Transform rocketPartTransform, Transform attachmentPoint)
+    {
+        rocketPartTransform.position = attachmentPoint.position;
+        rocketPartTransform.parent = attachmentPoint.transform;
+        attachedRocketParts.Add(rocketPart);
+    }
+    
+    private void toggleDetach(RocketPartController attachedPart)
+    {
+        if (attachedPart != null)
+        {
+            detachPart(attachedPart);
+        }
+    }
+    
     /**
-     * TODO: performance might drop 
-     */
+    * TODO: performance might drop 
+    */
     private void detachPart(RocketPartController attachedPart)
     {
         var inventory= RocketPartsDatabase.Instance.inventory;
@@ -78,27 +96,21 @@ public class AttachmentScript : MonoBehaviour
         inventory.Add(attachedPart);
         attachedRocketParts.Remove(attachedPart);
     }
-
-    private void attachMainThruster(RocketPartController rocketPart, float thrust)
+    
+    private void OnInventorySelect()
     {
-        var attachmentPoint = rocketController.mainThrusterAttachment;
-        var rocketPartTransform = rocketPart.transform;
-
-        rocketController.thrust = thrust;
-        rocketPartTransform.position = attachmentPoint.position;
-        rocketPartTransform.parent = attachmentPoint.transform;
-        attachedRocketParts.Add(rocketPart);
-    }
-
-    private void attachRCSThruster(RocketPartController rocketPart, float thrust)
-    {
-        var attachmentPoint = rocketController.rcsThrusterAttachment;
-        var rocketPartTransform = rocketPart.transform;
-
-        rocketController.rcsThrust = thrust;
-        rocketPartTransform.position = attachmentPoint.position;
-        rocketPartTransform.parent = attachmentPoint.transform;
-        attachedRocketParts.Add(rocketPart);
-        print(attachedRocketParts.Count);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                var rocketPart = hit.transform.gameObject.GetComponent<RocketPartController>();
+                if (rocketPart != null)
+                {
+                    ApplyAttachment(rocketPart);
+                }
+            }
+        }
     }
 }

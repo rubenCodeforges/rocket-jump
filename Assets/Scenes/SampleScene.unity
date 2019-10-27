@@ -193,7 +193,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0.1953125, z: 0.02734375, w: -0.0390625}
+  m_BoundingSphereOverride: {x: 3.7616967e-37, y: 7.9639e-41, z: 2.85372e-40, w: 1.614e-42}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -618,13 +618,19 @@ PrefabInstance:
     - target: {fileID: 8216800236327728647, guid: 0b017506023e83241b34a41d29ed2753,
         type: 3}
       propertyPath: rocketParts.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8216800236327728647, guid: 0b017506023e83241b34a41d29ed2753,
         type: 3}
       propertyPath: rocketParts.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 1da226fb5cd8fb6429d5bb29d6d42213,
+        type: 2}
+    - target: {fileID: 8216800236327728647, guid: 0b017506023e83241b34a41d29ed2753,
+        type: 3}
+      propertyPath: rocketParts.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a3b7e19564838c4fa47b7cfca4d6e72,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b017506023e83241b34a41d29ed2753, type: 3}

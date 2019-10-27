@@ -10,6 +10,8 @@ public class RocketController : MonoBehaviour
     public float fuel = 0f;
     public Transform mainThrusterAttachment;
     public Transform rcsThrusterAttachment;
+    public Transform fuelTankAttachment;
+    public Transform noseConeAttachment;
 
     private Rigidbody rigidBody;
     private InputEventSubject eventSubject;
