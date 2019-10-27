@@ -12,15 +12,16 @@ public class RocketController : MonoBehaviour
     public Transform rcsThrusterAttachment;
     public Transform fuelTankAttachment;
     public Transform noseConeAttachment;
-
-    private Rigidbody rigidBody;
+    public Transform finsAttachment;
+    public Rigidbody rigidBody;
+    
     private InputEventSubject eventSubject;
 
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody>();
         eventSubject = GameManager.Instance.inputEventSubject;
         eventSubject.UserInput += (object source, UserInputEventArgs args) => { print(args.Direction); };
+        rigidBody.isKinematic = true;
     }
 
     // Update is called once per frame

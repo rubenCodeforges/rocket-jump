@@ -4,6 +4,7 @@
     {
         THRUSTER,
         FUEL,
+        FINS,
         RCS
     }
 }

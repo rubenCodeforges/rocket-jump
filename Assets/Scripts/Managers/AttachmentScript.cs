@@ -37,6 +37,9 @@ public class AttachmentScript : MonoBehaviour
         } else if (type == PartType.FUEL)
         {
             attachFuelTank(rocketPart);
+        }else if (type == PartType.FINS)
+        {
+            attachFins(rocketPart);
         }
         RocketPartsDatabase.Instance.inventory.Remove(rocketPart);
     }
@@ -60,11 +63,18 @@ public class AttachmentScript : MonoBehaviour
         rocketController.fuel = rocketPart.part.fuel;
         applyAttachment(rocketPart, rocketPart.transform, rocketController.fuelTankAttachment);
     }
+    
+    private void attachFins(RocketPartController rocketPart)
+    {
+        rocketController.rigidBody.isKinematic = false;
+        applyAttachment(rocketPart, rocketPart.transform, rocketController.finsAttachment);
+    }
 
     private void applyAttachment(RocketPartController rocketPart, Transform rocketPartTransform, Transform attachmentPoint)
     {
         rocketPartTransform.position = attachmentPoint.position;
         rocketPartTransform.parent = attachmentPoint.transform;
+        rocketController.GetComponent<Rigidbody>().mass += rocketPart.part.weight;
         attachedRocketParts.Add(rocketPart);
     }
     

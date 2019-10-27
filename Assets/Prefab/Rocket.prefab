@@ -75,6 +75,8 @@ MonoBehaviour:
   rcsThrusterAttachment: {fileID: 8465950965395113533}
   fuelTankAttachment: {fileID: 5607490450792711150}
   noseConeAttachment: {fileID: 8870392577440970662}
+  finsAttachment: {fileID: 8218301741831259216}
+  rigidBody: {fileID: -2585435683484228786}
 --- !u!1 &216439316846130934
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,7 +520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6470829442522119421
 Transform:
   m_ObjectHideFlags: 0

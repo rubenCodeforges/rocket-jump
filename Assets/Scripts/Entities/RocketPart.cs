@@ -11,5 +11,6 @@ namespace Entities
         public PartType type;
         public float fuel;
         public GameObject model;
+        public float weight = 0.01f;
     }
 }
