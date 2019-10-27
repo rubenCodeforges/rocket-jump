@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3eb90fcd9ea47ec815b3426e8d04e9f, type: 3}
-  m_Name: SmallThruster
+  m_Name: BigThruster
   m_EditorClassIdentifier: 
   name: SmallThruster
-  thrust: 80
+  thrust: 120
   type: 0
-  model: {fileID: 6340472397436768021, guid: 9f99a98a0dc62364ab4b71a909e2b2bc, type: 3}
+  model: {fileID: 6340472397436768021, guid: b33065088988a9a45bcb844a3ce16ee3, type: 3}

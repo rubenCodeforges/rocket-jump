@@ -322,16 +322,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 571637927525159804, guid: adfc59a2d0cfdcd47b1cfd116b32a123,
-        type: 3}
-      propertyPath: rocketController
-      value: 
-      objectReference: {fileID: 1702838233}
     - target: {fileID: 34752802203807246, guid: adfc59a2d0cfdcd47b1cfd116b32a123,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 571637927525159804, guid: adfc59a2d0cfdcd47b1cfd116b32a123,
+        type: 3}
+      propertyPath: rocketController
+      value: 
+      objectReference: {fileID: 1702838233}
     - target: {fileID: 34752802203807243, guid: adfc59a2d0cfdcd47b1cfd116b32a123,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -401,6 +401,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rocket
       objectReference: {fileID: 0}
+    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
+      propertyPath: mainThruster
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
+      propertyPath: rcsThruster
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
+      propertyPath: rcsThrust
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
+      propertyPath: thrust
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9056749413596199411, guid: 6c738b075f4d68741951be793c7dbc01,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -460,22 +476,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mass
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
-      propertyPath: mainThruster
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
-      propertyPath: rcsThruster
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
-      propertyPath: rcsThrust
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 964199579, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
-      propertyPath: thrust
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c738b075f4d68741951be793c7dbc01, type: 3}
@@ -615,5 +615,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8216800236327728647, guid: 0b017506023e83241b34a41d29ed2753,
+        type: 3}
+      propertyPath: rocketParts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8216800236327728647, guid: 0b017506023e83241b34a41d29ed2753,
+        type: 3}
+      propertyPath: rocketParts.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1da226fb5cd8fb6429d5bb29d6d42213,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b017506023e83241b34a41d29ed2753, type: 3}

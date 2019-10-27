@@ -5,23 +5,15 @@ using UnityEngine;
 
 public class RocketPartsInventory : MonoBehaviour
 {
-    private List<RocketPart> availableParts = new List<RocketPart>();
-    
     void Start()
     {
         spawnAllParts();
     }
 
-    public List<RocketPart> getAvailableObject()
-    {
-        return availableParts;
-    }
-    
     private void spawnAllParts()
     {
         var items = RocketPartsDatabase.Instance.rocketParts;
         var lastPrefabSize = Vector3.zero;
-        availableParts = items;
         
         for (int i = 0; i < items.Count; i++)
         {
@@ -35,8 +27,9 @@ public class RocketPartsInventory : MonoBehaviour
             }
 
             instance.AddComponent<RocketPartController>();
-            instance.GetComponent<RocketPartController>().part = items[i];
-            
+            var rocketPart = instance.GetComponent<RocketPartController>();
+            rocketPart.part = items[i];
+            RocketPartsDatabase.Instance.inventory.Add(rocketPart);
             lastPrefabSize = size;
         }
     }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SmallRcsThruster
   m_EditorClassIdentifier: 
   name: SmallRcsThruster
-  thrust: 100
+  thrust: 20
   type: 1
   model: {fileID: 5007238491389480824, guid: b55faed431673f049a84e99dbf07de5e, type: 3}

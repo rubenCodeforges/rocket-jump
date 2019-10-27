@@ -1,4 +1,6 @@
-﻿using Containers;
+﻿using System.Collections.Generic;
+using Containers;
+using Containers.RocketParts;
 using Entities;
 using Enums;
 using UnityEngine;
@@ -6,10 +8,12 @@ using UnityEngine;
 public class AttachmentScript : MonoBehaviour
 {
     public RocketController rocketController;
-
-    // Start is called before the first frame update
+    private RocketPartsInventory rocketPartInventory;
+    private List<RocketPartController> attachedRocketParts = new List<RocketPartController>();
+    
     void Start()
     {
+        rocketPartInventory = FindObjectOfType<RocketPartsInventory>();
     }
 
     // Update is called once per frame
@@ -37,13 +41,41 @@ public class AttachmentScript : MonoBehaviour
 
         if (type == PartType.THRUSTER)
         {
+            var attachedPart = 
+                attachedRocketParts.Find((p) => rocketPart.part.type.Equals(p.part.type));
+            if (attachedPart != null)
+            {
+                detachPart(attachedPart);
+            }
             attachMainThruster(rocketPart, thrust);
         }
         else if (type == PartType.RCS)
         {
             attachRCSThruster(rocketPart, thrust);
         }
+        RocketPartsDatabase.Instance.inventory.Remove(rocketPart);
         print(rocketPart.part.thrust);
+    }
+
+    /**
+     * TODO: performance might drop 
+     */
+    private void detachPart(RocketPartController attachedPart)
+    {
+        var inventory= RocketPartsDatabase.Instance.inventory;
+        var lastInventoryModel = inventory?[inventory.Count - 1].gameObject;
+        var attachedModel = attachedPart.gameObject;
+        var size = attachedModel.GetComponent<Collider>().bounds.size;
+        var lastInventorySize = lastInventoryModel.GetComponent<Collider>().bounds.size;
+        attachedModel.transform.parent = rocketPartInventory.transform;
+        
+        var position = attachedModel.transform.position;
+        position = rocketPartInventory.transform.position;
+        position += new Vector3(size.x + lastInventorySize.x, 0, 0);
+        attachedModel.transform.position = position;
+
+        inventory.Add(attachedPart);
+        attachedRocketParts.Remove(attachedPart);
     }
 
     private void attachMainThruster(RocketPartController rocketPart, float thrust)
@@ -54,6 +86,7 @@ public class AttachmentScript : MonoBehaviour
         rocketController.thrust = thrust;
         rocketPartTransform.position = attachmentPoint.position;
         rocketPartTransform.parent = attachmentPoint.transform;
+        attachedRocketParts.Add(rocketPart);
     }
 
     private void attachRCSThruster(RocketPartController rocketPart, float thrust)
@@ -64,5 +97,6 @@ public class AttachmentScript : MonoBehaviour
         rocketController.rcsThrust = thrust;
         rocketPartTransform.position = attachmentPoint.position;
         rocketPartTransform.parent = attachmentPoint.transform;
+        attachedRocketParts.Add(rocketPart);
     }
 }
