@@ -9,6 +9,7 @@ namespace Entities
         public new string name;
         public float thrust;
         public PartType type;
+        public float fuel;
         public GameObject model;
     }
 }

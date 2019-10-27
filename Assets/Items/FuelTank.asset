@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3eb90fcd9ea47ec815b3426e8d04e9f, type: 3}
-  m_Name: SmallRcsThruster
+  m_Name: FuelTank
   m_EditorClassIdentifier: 
-  name: SmallRcsThruster
-  thrust: 20
-  type: 2
-  fuel: 0
-  model: {fileID: 5007238491389480824, guid: b55faed431673f049a84e99dbf07de5e, type: 3}
+  name: 
+  thrust: 0
+  type: 1
+  fuel: 200
+  model: {fileID: 4353094718234437969, guid: 43575e2112f52694ca34dc0fef242432, type: 3}

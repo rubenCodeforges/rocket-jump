@@ -51,6 +51,7 @@ public class AttachmentScript : MonoBehaviour
         }
         else if (type == PartType.RCS)
         {
+            print("rcs");
             attachRCSThruster(rocketPart, thrust);
         }
         RocketPartsDatabase.Instance.inventory.Remove(rocketPart);
@@ -98,5 +99,6 @@ public class AttachmentScript : MonoBehaviour
         rocketPartTransform.position = attachmentPoint.position;
         rocketPartTransform.parent = attachmentPoint.transform;
         attachedRocketParts.Add(rocketPart);
+        print(attachedRocketParts.Count);
     }
 }

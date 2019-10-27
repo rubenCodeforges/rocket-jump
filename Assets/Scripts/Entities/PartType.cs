@@ -3,6 +3,7 @@
     public enum PartType
     {
         THRUSTER,
+        FUEL,
         RCS
     }
 }

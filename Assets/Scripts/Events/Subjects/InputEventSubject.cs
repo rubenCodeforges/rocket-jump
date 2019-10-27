@@ -8,12 +8,19 @@ namespace Events
     public class InputEventSubject
     {
         public delegate void UserInputEventHandler(object target, UserInputEventArgs e);
+        public delegate void UserInputStopEventHandler(object target, UserInputEventArgs e);
 
         public event UserInputEventHandler UserInput;
+        public event UserInputStopEventHandler UserInputStop;
 
         public virtual void OnUserInput(InputDirection direction)
         {
             UserInput?.Invoke(this, new UserInputEventArgs() {Direction = direction} );
+        }
+
+        public virtual void OnUserInputStop()
+        {
+            UserInputStop?.Invoke(this, null );
         }
     }
 

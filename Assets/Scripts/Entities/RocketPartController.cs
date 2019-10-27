@@ -12,16 +12,43 @@ namespace Entities
         private InputEventSubject eventSubject;
         private ParticleSystem particleSystem;
         private bool isThrusting = false;
+
         private void Start()
         {
             particleSystem = transform.GetComponentInChildren<ParticleSystem>();
             eventSubject = GameManager.Instance.inputEventSubject;
             eventSubject = GameManager.Instance.inputEventSubject;
             eventSubject.UserInput += OnUserInput;
+            eventSubject.UserInputStop += OnUserInputStop;
+            StartExhaust();
+        }
+
+        private void Update()
+        {
+            if (!Input.anyKey)
+            {
+                StopExhaust();
+            }
         }
 
         private void OnUserInput(object source, UserInputEventArgs args)
         {
+            StartExhaust();
+        }
+
+        private void OnUserInputStop(object source, EventArgs args)
+        {
+            StopExhaust();
+        }
+
+        private void StopExhaust()
+        {
+            //particleSystem.Stop();
+        }
+
+        private void StartExhaust()
+        {
+            //particleSystem.Play();
         }
     }
 }
