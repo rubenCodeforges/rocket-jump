@@ -15,5 +15,6 @@ MonoBehaviour:
   name: FuelTank
   thrust: 0
   type: 1
-  fuel: 200
+  fuel: 3000
   model: {fileID: 279087089353678178, guid: 79f8a99342116aa4492a27a4ef8657cf, type: 3}
+  weight: 0.05
