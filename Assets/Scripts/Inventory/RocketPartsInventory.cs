@@ -13,8 +13,7 @@ public class RocketPartsInventory : MonoBehaviour
     private void spawnAllParts()
     {
         var items = RocketPartsDatabase.Instance.rocketParts;
-        var lastPrefabSize = Vector3.zero;
-        
+
         for (int i = 0; i < items.Count; i++)
         {
             var partPrefab = items[i].model;
@@ -23,14 +22,20 @@ public class RocketPartsInventory : MonoBehaviour
 
             if (i > 0)
             {
-                instance.transform.position += new Vector3(size.x + lastPrefabSize.x, 0, 0);
+                var lastPrefab =
+                    RocketPartsDatabase.Instance.inventory[RocketPartsDatabase.Instance.inventory.Count - 1];
+                var lastSize = lastPrefab.GetComponent<Collider>().bounds.size;
+                var position = instance.transform.position;
+
+                position = lastPrefab.transform.position;
+                position += new Vector3(size.x + lastSize.x  /2, 0, 0);
+                instance.transform.position = position;
             }
 
             instance.AddComponent<RocketPartController>();
             var rocketPart = instance.GetComponent<RocketPartController>();
             rocketPart.part = items[i];
             RocketPartsDatabase.Instance.inventory.Add(rocketPart);
-            lastPrefabSize = size;
         }
     }
 }
