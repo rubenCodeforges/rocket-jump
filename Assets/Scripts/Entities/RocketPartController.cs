@@ -1,4 +1,5 @@
 ﻿using System;
+using Containers;
 using Enums;
 using Events;
 using Managers;
@@ -20,7 +21,6 @@ namespace Entities
             eventSubject = GameManager.Instance.inputEventSubject;
             eventSubject.UserInput += OnUserInput;
             eventSubject.UserInputStop += OnUserInputStop;
-            StartExhaust();
         }
 
         private void Update()
@@ -33,7 +33,7 @@ namespace Entities
 
         private void OnUserInput(object source, UserInputEventArgs args)
         {
-            StartExhaust();
+            StartExhaust(args.Direction);
         }
 
         private void OnUserInputStop(object source, EventArgs args)
@@ -49,11 +49,17 @@ namespace Entities
             }
         }
 
-        private void StartExhaust()
+        private void StartExhaust(InputDirection direction)
         {
             if (particleSystem != null)
             {
-                particleSystem.Play();                
+                var canPlay = 
+                    part.type == PartType.RCS && (direction == InputDirection.LEFT || direction == InputDirection.RIGHT) ||
+                    part.type == PartType.THRUSTER && direction == InputDirection.UP;
+                if (canPlay)
+                {
+                    particleSystem.Play();
+                }
             }
         }
     }

@@ -45,6 +45,8 @@ public class RocketController : MonoBehaviour
 
             if (horizontalInput != 0f)
             {
+                
+                // TODO: On release try to negate applied force in opposing direction
                 eventSubject.OnUserInput(horizontalInput > 0f ? InputDirection.RIGHT : InputDirection.LEFT);
                 rigidBody.AddForceAtPosition(
                     rcsThrusterAttachment.right * (horizontalInput * rcsThrust * -1 * Time.deltaTime),
