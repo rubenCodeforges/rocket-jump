@@ -3,7 +3,7 @@ using Containers.RocketParts;
 using Entities;
 using UnityEngine;
 
-public class RocketPartsInventory : MonoBehaviour
+public class PartsSpawner : MonoBehaviour
 {
     void Start()
     {

@@ -18,3 +18,4 @@ MonoBehaviour:
   fuel: 0
   model: {fileID: 6340472397436768021, guid: 9f99a98a0dc62364ab4b71a909e2b2bc, type: 3}
   weight: 0.01
+  icon: {fileID: 21300000, guid: 771deb4f88cd6784985f645468831828, type: 3}

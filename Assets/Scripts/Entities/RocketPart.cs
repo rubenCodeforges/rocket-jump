@@ -1,5 +1,6 @@
 ﻿using Containers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Entities
 {
@@ -12,5 +13,6 @@ namespace Entities
         public float fuel;
         public GameObject model;
         public float weight = 0.01f;
+        public Sprite icon;
     }
 }

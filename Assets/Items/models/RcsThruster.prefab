@@ -477,6 +477,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExhaustLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 711934479915123003, guid: e1c58e2c7e235804685155ddafd83803,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5232304507227225807, guid: e1c58e2c7e235804685155ddafd83803,
         type: 3}
       propertyPath: m_LocalPosition.x

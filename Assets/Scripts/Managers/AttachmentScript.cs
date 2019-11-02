@@ -8,12 +8,12 @@ using UnityEngine;
 public class AttachmentScript : MonoBehaviour
 {
     public RocketController rocketController;
-    private RocketPartsInventory rocketPartInventory;
+    private PartsSpawner _partSpawner;
     private List<RocketPartController> attachedRocketParts = new List<RocketPartController>();
     
     void Start()
     {
-        rocketPartInventory = FindObjectOfType<RocketPartsInventory>();
+        _partSpawner = FindObjectOfType<PartsSpawner>();
     }
 
     // Update is called once per frame
@@ -96,10 +96,10 @@ public class AttachmentScript : MonoBehaviour
         var attachedModel = attachedPart.gameObject;
         var size = attachedModel.GetComponent<Collider>().bounds.size;
         var lastInventorySize = lastInventoryModel.GetComponent<Collider>().bounds.size;
-        attachedModel.transform.parent = rocketPartInventory.transform;
+        attachedModel.transform.parent = _partSpawner.transform;
         
         var position = attachedModel.transform.position;
-        position = rocketPartInventory.transform.position;
+        position = _partSpawner.transform.position;
         position += new Vector3(size.x + lastInventorySize.x, 0, 0);
         attachedModel.transform.position = position;
 
