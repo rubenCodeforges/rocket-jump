@@ -113,11 +113,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915173cfe9dfb864a9383908c061670f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  massFactor: 10
-  inventoryItem: {fileID: 1345720696428195130, guid: 87554f5413c50f14c9013714bfe074f3,
+  massFactor: 1000
+  inventoryItemPrefab: {fileID: 1345720696428195130, guid: 87554f5413c50f14c9013714bfe074f3,
     type: 3}
-  inventoryContainer: {fileID: 2236021518603976274}
-  player: {fileID: 0}
+  inventoryUIContainer: {fileID: 2236021518603976274}
+  attachmentScript: {fileID: 0}
+  uiInventoryItems: []
 --- !u!1 &2236021518603976274
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.2000122, y: 267.6}
-  m_SizeDelta: {x: -27.1, y: -559.8}
+  m_AnchoredPosition: {x: 1.2000122, y: 349.7}
+  m_SizeDelta: {x: -27.1, y: -724}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2236021518603976287
 CanvasRenderer:

@@ -9,13 +9,14 @@ public class AttachmentScript : MonoBehaviour
     public RocketController rocketController;
     private List<RocketPartController> attachedRocketParts = new List<RocketPartController>();
 
-    public void HandleAttachment(RocketPart rocketPart)
+    public bool HandleAttachment(RocketPart rocketPart)
     {
         var type = InstantiatePart(rocketPart, out var rocketPartInstance);
-
+        var hasDetached = false;
+        
         if (type == PartType.THRUSTER)
         {
-            toggleDetach(attachedRocketParts.Find((p) => rocketPart.type.Equals(p.part.type)));
+            hasDetached = toggleDetach(attachedRocketParts.Find((p) => rocketPart.type.Equals(p.part.type)));
             attachMainThruster(rocketPartInstance);
         }
         else if (type == PartType.RCS)
@@ -32,6 +33,7 @@ public class AttachmentScript : MonoBehaviour
         }
 
         // RocketPartsDatabase.Instance.rocketPartInventory.Remove(rocketPart);
+        return hasDetached;
     }
 
     private static PartType InstantiatePart(RocketPart rocketPart, out RocketPartController rocketPartInstance)
@@ -78,12 +80,14 @@ public class AttachmentScript : MonoBehaviour
         attachedRocketParts.Add(rocketPart);
     }
 
-    private void toggleDetach(RocketPartController attachedPart)
+    private bool toggleDetach(RocketPartController attachedPart)
     {
         if (attachedPart != null)
         {
-            detachPart(attachedPart);
+            Destroy(attachedPart);
+            return true;
         }
+        return false; 
     }
 
     /**

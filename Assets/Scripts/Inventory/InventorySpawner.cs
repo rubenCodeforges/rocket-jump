@@ -10,19 +10,15 @@ using UnityEngine.UI;
 public class InventorySpawner : MonoBehaviour
 {
     public float massFactor = 10f;
-    public GameObject inventoryItem;
-    public GameObject inventoryContainer;
-    public GameObject player;
+    public GameObject inventoryItemPrefab;
+    public GameObject inventoryUIContainer;
     public AttachmentScript attachmentScript;
+    
+    public List<GameObject> uiInventoryItems = new List<GameObject>();
     
     void Start()
     {
         spawnAllParts();
-    }
-
-    public void OnItemSelect(GameObject reference)
-    {
-        print(reference.GetComponent<RocketPartController>().part.name);
     }
 
     private void spawnAllParts()
@@ -31,32 +27,56 @@ public class InventorySpawner : MonoBehaviour
 
         for (int i = 0; i < items.Count; i++)
         {
-            var newUIElement = CreateInventoryItem(items, i);
-            InitInventoryItem(newUIElement, items, i);
-            RocketPartsDatabase.Instance.uiInventory.Add(items[i]);
+            AddToInventory(items[i], CreateInventoryItem(items[i]));
         }
     }
 
-
-    private GameObject CreateInventoryItem(List<RocketPart> items, int i)
+    private void AddToInventory(RocketPart part, GameObject newUIElement)
     {
-        var newUIElement = Instantiate(inventoryItem, Vector3.zero, Quaternion.identity, inventoryContainer.transform);
+        RocketPartsDatabase.Instance.uiInventory.Add(part);
+        uiInventoryItems.Add(newUIElement);
+    }
+    
+    private void RemoveFromInventory(RocketPart rocketPart)
+    {
+        var foundIndex = uiInventoryItems
+            .FindIndex((uiElement) => uiElement.GetComponent<InventoryItem>().rocketPart == rocketPart);
+        if (foundIndex != -1)
+        {
+            Destroy(uiInventoryItems[foundIndex]);
+            uiInventoryItems.RemoveAt(foundIndex);            
+        }
+    }
+    
+    private GameObject CreateInventoryItem(RocketPart part)
+    {
+        var newUIElement = Instantiate(inventoryItemPrefab, Vector3.zero, Quaternion.identity, inventoryUIContainer.transform);
         newUIElement.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        newUIElement.GetComponent<Image>().sprite = items[i].icon;
+        newUIElement.GetComponent<Image>().sprite = part.icon;
         newUIElement.GetComponentInChildren<TextMeshProUGUI>()
-            .SetText(Math.Round(items[i].weight * massFactor) + " kg");
+            .SetText(Math.Round(part.weight * massFactor) + " kg");
+        SetupInventoryItem(newUIElement, part);
         return newUIElement;
     }
 
-    private void InitInventoryItem(GameObject newUIElement, List<RocketPart> items, int i)
+    private void SetupInventoryItem(GameObject newUIElement, RocketPart part)
     {
         var itemInstance = newUIElement.GetComponent<InventoryItem>();
-        itemInstance.rocketPart = items[i];
+        itemInstance.rocketPart = part;
         itemInstance.AddEventListener(OnItemClick);
     }
+    
 
     private void OnItemClick(RocketPart part)
     {
-        attachmentScript.HandleAttachment(part);
+        var hasDetached = attachmentScript.HandleAttachment(part);
+        if (hasDetached)
+        {
+            AddToInventory(part, CreateInventoryItem(part));
+        }
+        else
+        {
+            RemoveFromInventory(part);
+        }
     }
 }
