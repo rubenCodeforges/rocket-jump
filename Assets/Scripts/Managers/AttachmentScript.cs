@@ -2,48 +2,47 @@
 using Containers;
 using Containers.RocketParts;
 using Entities;
-using Enums;
 using UnityEngine;
 
 public class AttachmentScript : MonoBehaviour
 {
     public RocketController rocketController;
-    private PartsSpawner _partSpawner;
     private List<RocketPartController> attachedRocketParts = new List<RocketPartController>();
-    
-    void Start()
-    {
-        _partSpawner = FindObjectOfType<PartsSpawner>();
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void HandleAttachment(RocketPart rocketPart)
     {
-        OnInventorySelect();
-    }
-
-    private void HandleAttachment(RocketPartController rocketPart)
-    {
-        var type = rocketPart.part.type;
+        var type = InstantiatePart(rocketPart, out var rocketPartInstance);
 
         if (type == PartType.THRUSTER)
         {
-            toggleDetach(attachedRocketParts.Find((p) => rocketPart.part.type.Equals(p.part.type)));
-            attachMainThruster(rocketPart);
+            toggleDetach(attachedRocketParts.Find((p) => rocketPart.type.Equals(p.part.type)));
+            attachMainThruster(rocketPartInstance);
         }
         else if (type == PartType.RCS)
         {
-            attachRCSThruster(rocketPart);
-        } else if (type == PartType.FUEL)
-        {
-            attachFuelTank(rocketPart);
-        }else if (type == PartType.FINS)
-        {
-            attachFins(rocketPart);
+            attachRCSThruster(rocketPartInstance);
         }
-        RocketPartsDatabase.Instance.inventory.Remove(rocketPart);
+        else if (type == PartType.FUEL)
+        {
+            attachFuelTank(rocketPartInstance);
+        }
+        else if (type == PartType.FINS)
+        {
+            attachFins(rocketPartInstance);
+        }
+
+        // RocketPartsDatabase.Instance.rocketPartInventory.Remove(rocketPart);
     }
 
+    private static PartType InstantiatePart(RocketPart rocketPart, out RocketPartController rocketPartInstance)
+    {
+        var type = rocketPart.type;
+        var instance = Instantiate(rocketPart.model);
+        instance.AddComponent<RocketPartController>();
+        rocketPartInstance = instance.GetComponent<RocketPartController>();
+        rocketPartInstance.part = rocketPart;
+        return type;
+    }
 
 
     private void attachMainThruster(RocketPartController rocketPart)
@@ -57,27 +56,28 @@ public class AttachmentScript : MonoBehaviour
         rocketController.rcsThrust = rocketPart.part.thrust;
         applyAttachment(rocketPart, rocketPart.transform, rocketController.rcsThrusterAttachment);
     }
-    
+
     private void attachFuelTank(RocketPartController rocketPart)
     {
         rocketController.fuel = rocketPart.part.fuel;
         applyAttachment(rocketPart, rocketPart.transform, rocketController.fuelTankAttachment);
     }
-    
+
     private void attachFins(RocketPartController rocketPart)
     {
         rocketController.rigidBody.isKinematic = false;
         applyAttachment(rocketPart, rocketPart.transform, rocketController.finsAttachment);
     }
 
-    private void applyAttachment(RocketPartController rocketPart, Transform rocketPartTransform, Transform attachmentPoint)
+    private void applyAttachment(RocketPartController rocketPart, Transform rocketPartTransform,
+        Transform attachmentPoint)
     {
         rocketPartTransform.position = attachmentPoint.position;
         rocketPartTransform.parent = attachmentPoint.transform;
         rocketController.GetComponent<Rigidbody>().mass += rocketPart.part.weight;
         attachedRocketParts.Add(rocketPart);
     }
-    
+
     private void toggleDetach(RocketPartController attachedPart)
     {
         if (attachedPart != null)
@@ -85,42 +85,24 @@ public class AttachmentScript : MonoBehaviour
             detachPart(attachedPart);
         }
     }
-    
+
     /**
     * TODO: performance might drop 
     */
     private void detachPart(RocketPartController attachedPart)
     {
-        var inventory= RocketPartsDatabase.Instance.inventory;
-        var lastInventoryModel = inventory?[inventory.Count - 1].gameObject;
-        var attachedModel = attachedPart.gameObject;
-        var size = attachedModel.GetComponent<Collider>().bounds.size;
-        var lastInventorySize = lastInventoryModel.GetComponent<Collider>().bounds.size;
-        attachedModel.transform.parent = _partSpawner.transform;
-        
-        var position = attachedModel.transform.position;
-        position = _partSpawner.transform.position;
-        position += new Vector3(size.x + lastInventorySize.x, 0, 0);
-        attachedModel.transform.position = position;
-
-        inventory.Add(attachedPart);
-        attachedRocketParts.Remove(attachedPart);
-    }
-    
-    private void OnInventorySelect()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                var rocketPart = hit.transform.gameObject.GetComponent<RocketPartController>();
-                if (rocketPart != null)
-                {
-                    HandleAttachment(rocketPart);
-                }
-            }
-        }
+//        var inventory = RocketPartsDatabase.Instance.rocketPartInventory;
+//        var lastInventoryModel = inventory?[inventory.Count - 1].gameObject;
+//        var attachedModel = attachedPart.gameObject;
+//        var size = attachedModel.GetComponent<Collider>().bounds.size;
+//        var lastInventorySize = lastInventoryModel.GetComponent<Collider>().bounds.size;
+//
+//
+//        var position = attachedModel.transform.position;
+//        position += new Vector3(size.x + lastInventorySize.x, 0, 0);
+//        attachedModel.transform.position = position;
+//
+//        inventory.Add(attachedPart);
+//        attachedRocketParts.Remove(attachedPart);
     }
 }

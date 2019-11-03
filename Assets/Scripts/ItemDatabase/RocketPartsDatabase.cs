@@ -8,7 +8,8 @@ namespace Containers.RocketParts
     public class RocketPartsDatabase : MonoBehaviour
     {
         public List<RocketPart> rocketParts = new List<RocketPart>();
-        public List<RocketPartController> inventory = new List<RocketPartController>();
+        public List<RocketPartController> rocketPartInventory = new List<RocketPartController>();
+        public List<RocketPart> uiInventory = new List<RocketPart>();
         public static RocketPartsDatabase Instance { get; private set; }
         
         void Awake()
